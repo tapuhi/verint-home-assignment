@@ -1,10 +1,14 @@
 pipeline {
   agent any
   stages {
+    stage('md5check') {
+        steps {
+          sh 'md5sum -c weather2json.py.md5'
+        }
+    }
     stage('installRequirements') {
       steps {
-        sh '''ls -altrh
-pip install -r requirements.txt'''
+        sh 'pip install -r requirements.txt'
       }
     }
     stage('getWeatherJson') {
