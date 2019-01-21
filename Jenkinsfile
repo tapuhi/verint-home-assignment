@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage('installRequirements') {
       steps {
-        sh 'pip install -r requirements.txt'
+        sh '''ls -altrh
+pip install -r requirements.txt'''
       }
     }
     stage('getWeatherJson') {
