@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('md5check') {
       steps {
-        sh 'md5sum -c weather2json.py.md5'
+        sh 'md5sum -c hash.md5'
       }
     }
     stage('installRequirements') {
