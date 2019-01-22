@@ -81,5 +81,9 @@ The pandas package is a powerful Python data analysis toolkit. In our script we 
 ## Jenkins Pipeline
 In this repo there is  a `Jenkinsfile` which can be used into a jenkins server in order to fulfill [Step 2](#step-2)
 
-In adition to what was required in step 2 the pipeline also use the hash.md5 file to validate the `requirements.txt` 
+In adition to what was required in step 2 the pipeline also do the following:
+* use the hash.md5 file to validate the `requirements.txt` (in adition to the script validation)
+* installs the python package requirements (`pip install -r requirements.txt`)
+
+
  
