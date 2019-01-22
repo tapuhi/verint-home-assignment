@@ -59,10 +59,11 @@ OK).
 - Write clean code
 - Comments are welcome.
 - In case a special package is required add a comment with the following information:
-o Name of the package.
-o What the package does.
-o Which command was used to install the package?
-Adding pip requirements file will be nice
+   - Name of the package.
+   - What the package does.
+   - Which command was used to install the package? 
+   
+   Adding pip requirements file will be nice
 - Once the code is ready send us a link to the GitHub repository.
 
 ## Prerequisites
