@@ -1,11 +1,11 @@
 # verint-home-assignment
 
-* [Assginment description][#sssginment-description]
-    * [Step 1][#step-1-python-or-bash]
-    * [Step 2][#step-2]
-    * [Guidelines][#guidelines]
-* [Prerequisites][#prerequisites]
-* [Jenkins Pipeline][jenkins-pipeline]
+* [Assginment description](#assginment-description)
+    * [Step 1](#step-1-python-or-bash)
+    * [Step 2](#step-2)
+    * [Guidelines](#guidelines)
+* [Prerequisites](#prerequisites)
+* [Jenkins Pipeline](jenkins-pipeline)
 
 ## Assginment description 
 
@@ -79,7 +79,7 @@ pip install -r requirements.txt
 The pandas package is a powerful Python data analysis toolkit. In our script we use it to extract data from the forecast website in a tabular format.
 
 ## Jenkins Pipeline
-In this repo there is  a `Jenkinsfile` which can be used into a jenkins server in order to fulfill [Step 2][#step-2]
+In this repo there is  a `Jenkinsfile` which can be used into a jenkins server in order to fulfill [Step 2](#step-2)
 
 In adition to what was required in step 2 the pipeline also use the hash.md5 file to validate the `requirements.txt` 
  
