@@ -1,6 +1,9 @@
 import json
+import sys
 
 import pandas as pd
+
+FORECAST_URL = "https://weather.com/weather/hourbyhour/l/ISXX0026:1:IS"
 
 
 # f2c : converts fahrenheit to celsius
@@ -27,7 +30,13 @@ def m2k(miles, roundres=True):
 # parameters:
 #    output_file: The file where the JSON will be saved.
 def weather2json(output_file):
-    forecast_df, = pd.read_html("https://weather.com/weather/hourbyhour/l/ISXX0026:1:IS", header=None, encoding="utf-8")
+    try:
+        forecast_df, = pd.read_html(FORECAST_URL, header=None, encoding="utf-8")
+    except Exception as e:
+        print("Failed to gather weather forcase from {forecast_link} - {err}".format(forecast_link=FORECAST_URL,
+                                                                                     err=str(e)))
+        sys.exit(1)
+
     forecast_df = forecast_df.iloc[:, 1:]
     forecast_df.columns = ['TIME', 'DESC', 'TEMP', 'FEEL', 'PRECIP', 'HUMIDITY', 'WIND']
 
@@ -39,6 +48,7 @@ def weather2json(output_file):
     for col in ['TEMP', 'FEEL']:
         forecast_df[col] = forecast_df[col].map(lambda x: f2c(int(x[:-1])))
 
+    # The wind speed comes in Miles per hour which we need to convert to km/h
     forecast_df['WIND'] = forecast_df['WIND'].map(lambda x: x.split()[0] + " " + str(m2k(x.split()[1])) + " km/h")
     forecast_df.index = (forecast_df['TIME'])
     forecast_df = forecast_df[['DESC', 'TEMP', 'FEEL', 'PRECIP', 'HUMIDITY', 'WIND']]
@@ -47,8 +57,18 @@ def weather2json(output_file):
     # Output we need to go trough the json type.
     forecast = json.loads(forecast_df.to_json(orient="index", date_format="iso"))
 
-    with open(output_file, 'w') as json_fl:
-        json.dump(forecast, json_fl, indent=4, sort_keys=True)
+    try:
+        with open(output_file, 'w') as json_fl:
+            json.dump(forecast, json_fl, indent=4, sort_keys=True)
+    except IOError as e:
+        print("I/O error({errno}) while trying to open file {fl}: {errmsg}".format(errno=e.errno,
+                                                                                   fl=output_file,
+                                                                                   errmsg=e.strerror))
+        sys.exit(1)
+    except Exception as e:
+        print ("Unexpected error while trying to open file {fl}: {err}".format(fl=output_file,
+                                                                               err=str(e)))
+        sys.exit(1)
 
 
 if __name__ == "__main__":
