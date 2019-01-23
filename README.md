@@ -5,7 +5,7 @@
     * [Step 2](#step-2)
     * [Guidelines](#guidelines)
 * [Prerequisites](#prerequisites)
-* [Jenkins Pipeline](jenkins-pipeline)
+* [Jenkins Pipeline](#jenkins-pipeline)
 
 ## Assginment description 
 
